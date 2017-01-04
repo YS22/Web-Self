@@ -1,9 +1,9 @@
 from flask import Flask 
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 import os
-from flask.ext.login import LoginManager
-from flask.ext.openid import OpenID
+from flask_login import LoginManager
+from flask_openid import OpenID
 from config import basedir
 
 
