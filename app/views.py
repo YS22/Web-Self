@@ -10,7 +10,7 @@ from datetime import datetime
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def index():
     form = CommentForm()
     if form.validate_on_submit():
@@ -80,7 +80,7 @@ def logout():
 
 
 @app.route('/python', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def python():
     form = CommentForm()
     if form.validate_on_submit():
@@ -100,7 +100,7 @@ def python():
 
 
 @app.route('/javascript', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def javascript():
     form = CommentForm()
     if form.validate_on_submit():
