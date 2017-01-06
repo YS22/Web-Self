@@ -7,8 +7,8 @@ from .models import User
 #     openid = StringField('openid', validators=[DataRequired()])
 #     remember_me = BooleanField('remember_me', default=False)
 class LoginForm(Form):
-	nickname = StringField('Nickname', validators=[DataRequired()])
-	password = PasswordField('Password', validators=[DataRequired()])
+	nickname = StringField('Nickname:', validators=[DataRequired()])
+	password = PasswordField('Password:', validators=[DataRequired()])
 	remember_me = BooleanField('Keep me logged in')
 	submit = SubmitField('Log In')
 
@@ -16,9 +16,9 @@ class CommentForm(Form):
 	comment = StringField('comment', validators=[DataRequired()])
 
 class RegistrationForm(Form):
-	nickname=StringField('Nickname',validators=[DataRequired()])
-	password = PasswordField('Password', validators=[DataRequired(), EqualTo('password2', message='Passwords must match.')])
-	password2 = PasswordField('Confirm password', validators=[DataRequired()])
+	nickname=StringField('Nickname:',validators=[DataRequired()])
+	password = PasswordField('Password:', validators=[DataRequired(), EqualTo('password2', message='Passwords must match.')])
+	password2 = PasswordField('Confirmpassword:', validators=[DataRequired()])
 	submit = SubmitField('Register')
 
 

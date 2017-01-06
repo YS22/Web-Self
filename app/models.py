@@ -1,4 +1,5 @@
 from app import db
+# from werkzeug.security import generate_password_has, check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -8,6 +9,19 @@ class User(db.Model):
     comments2= db.relationship('Python_comment', backref = 'author', lazy = 'dynamic')
     comments3= db.relationship('Javascript_comment', backref = 'author', lazy = 'dynamic')
     password =db.Column(db.String(128))
+
+
+    # @property
+    # def password(self):
+    #     raise AttributeError('password is not a readable attribute')
+    
+    # @password.setter
+    # def password(self, password):
+    #     self.password = generate_password(password)
+    
+    # def verify_password(self, password):
+    #     return check_password(self.password, password)
+
     def is_authenticated(self):
         return True
 

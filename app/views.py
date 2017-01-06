@@ -8,6 +8,7 @@ from models import User, Git_comment,Python_comment,Javascript_comment
 from datetime import datetime
 
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -34,6 +35,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(nickname=form.nickname.data).first()
         if user is not None and user.password==form.password.data:
+        # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(url_for('index'))
         flash('Invalid username or password.')

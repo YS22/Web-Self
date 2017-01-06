@@ -1,6 +1,6 @@
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy
-
+# from flask.ext.bootstrap import Bootstrap
 import os
 from flask_login import LoginManager
 from flask_openid import OpenID
@@ -21,5 +21,6 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 
+# bootstrap = Bootstrap(app)
 
 from app import views,models

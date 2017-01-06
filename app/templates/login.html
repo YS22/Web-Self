@@ -1,17 +1,25 @@
 <!-- extend base layout -->
  {% extends "base.html" %}
+ 
 
 {% block content %}
-<form class="form" method="POST"> 
+<form class="form" method="POST">
+
+<div id="login">
+<h2 style="color: #666;" id='log'>Login</h2>
+
 {{ form.hidden_tag() }}     
-{{ form.nickname.label }}{{ form.nickname() }} <br>    
-{{ form.password.label }}{{ form.password() }}     
-{{ form.submit() }} </form>
+{{ form.nickname.label }}<br>{{ form.nickname(id='nc') }} <br>    
+{{ form.password.label }}<br>{{ form.password(id='nc') }}   <br> 
+{{ form.submit() }} 
+</form>
 
 <p>
-New user?
+New user ?
 <a href="{{ url_for('register') }}">
-Click here to register
+Return to register
 </a>
 </p>
+</div>
+
 {% endblock %}
