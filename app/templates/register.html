@@ -5,13 +5,10 @@
 <form class="form" method="POST"> 
 {{ form.hidden_tag() }}     
 {{ form.nickname.label }}{{ form.nickname() }} <br>    
-{{ form.password.label }}{{ form.password() }}     
+{{ form.password.label }}{{ form.password() }} <br>
+{{ form.password2.label }}{{ form.password2() }} <br>
+
+
 {{ form.submit() }} </form>
 
-<p>
-New user?
-<a href="{{ url_for('register') }}">
-Click here to register
-</a>
-</p>
 {% endblock %}

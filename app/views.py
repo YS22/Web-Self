@@ -3,14 +3,14 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid,models
 from forms import LoginForm
 from models import User
-from forms import LoginForm, CommentForm
+from forms import LoginForm, CommentForm,RegistrationForm
 from models import User, Git_comment,Python_comment,Javascript_comment
 from datetime import datetime
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def index():
     form = CommentForm()
     if form.validate_on_submit():
@@ -29,17 +29,29 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
-def login():
-    if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('index'))
-    form = LoginForm()
+def login(): 
+    form = LoginForm() 
     if form.validate_on_submit():
-        session['remember_me'] = form.remember_me.data
-        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-    return render_template('login.html',
-                           title='Sign In',
-                           form=form,
-                           providers=app.config['OPENID_PROVIDERS'])
+        user = User.query.filter_by(nickname=form.nickname.data).first()
+        if user is not None and user.password==form.password.data:
+            login_user(user, form.remember_me.data)
+            return redirect(url_for('index'))
+        flash('Invalid username or password.')
+    return render_template('login.html', form=form)
+
+    # return render_template('login.html', form=form)
+
+# def login():
+#     if g.user is not None and g.user.is_authenticated():
+#         return redirect(url_for('index'))
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         session['remember_me'] = form.remember_me.data
+#         return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
+#     return render_template('login.html',
+#                            title='Sign In',
+#                            form=form,
+#                            providers=app.config['OPENID_PROVIDERS'])
 
 @lm.user_loader
 def load_user(id):
@@ -80,7 +92,7 @@ def logout():
 
 
 @app.route('/python', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def python():
     form = CommentForm()
     if form.validate_on_submit():
@@ -100,7 +112,7 @@ def python():
 
 
 @app.route('/javascript', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def javascript():
     form = CommentForm()
     if form.validate_on_submit():
@@ -116,3 +128,18 @@ def javascript():
                            title='Home',
                            form=form,
                            comments3=comments3)
+
+
+
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(nickname=form.nickname.data,password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('You can now login.')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)

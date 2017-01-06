@@ -7,7 +7,7 @@ class User(db.Model):
     comments1= db.relationship('Git_comment', backref = 'author', lazy = 'dynamic')
     comments2= db.relationship('Python_comment', backref = 'author', lazy = 'dynamic')
     comments3= db.relationship('Javascript_comment', backref = 'author', lazy = 'dynamic')
-    
+    password =db.Column(db.String(128))
     def is_authenticated(self):
         return True
 
