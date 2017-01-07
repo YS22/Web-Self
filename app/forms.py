@@ -24,7 +24,7 @@ class RegistrationForm(Form):
 	submit = SubmitField(u'注册')
 
 
-	# def validate_nickname(self, field):
-	# 	if User.query.filter_by(nickname=field.data).first():
-	# 		raise ValidationError('Nickname already registered.')
+	def validate_nickname(self, field):
+		if User.query.filter_by(nickname=field.data).first():
+			raise ValidationError('Nickname already registered.')
 		
