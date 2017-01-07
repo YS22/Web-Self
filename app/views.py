@@ -32,7 +32,6 @@ def git():
 
 
 
-@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
