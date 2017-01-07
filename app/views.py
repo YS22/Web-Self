@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 @app.route('/', methods=['GET', 'POST'])
-# @app.route('/git', methods=['GET', 'POST'])
+@app.route('/git', methods=['GET', 'POST'])
 @login_required
 def git():
     form = CommentForm()
@@ -41,8 +41,8 @@ def login():
         if user is not None and user.password==form.password.data:
         # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(url_for('git'))
-            # return "hello"
+            # return redirect(url_for('git'))
+            return "hello"
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
 
