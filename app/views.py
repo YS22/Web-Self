@@ -11,9 +11,9 @@ from datetime import datetime
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 @app.route('/git', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def git():
     form = CommentForm()
     if form.validate_on_submit():
@@ -31,7 +31,7 @@ def git():
                            comments1=comments1)
 
 
-# @app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
@@ -43,6 +43,7 @@ def login():
             login_user(user, form.remember_me.data)
             return redirect(url_for('git'))
             # return "hello"
+           
 
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
