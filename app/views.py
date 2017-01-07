@@ -11,7 +11,7 @@ from datetime import datetime
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
@@ -30,6 +30,9 @@ def index():
                            form=form,
                            comments1=comments1)
 
+
+
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
