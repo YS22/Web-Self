@@ -12,20 +12,20 @@ from datetime import datetime
 
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/git', methods=['GET', 'POST'])
 @login_required
-def index():
+def git():
     form = CommentForm()
     if form.validate_on_submit():
-        comment1 = Git_comment(body=form.comment.data, timestamp=datetime.utcnow(), author=g.user)
+        comment1 = Git_comment(body=form.comment.data, timestamp=datetime.now(), author=g.user)
         db.session.add(comment1)
         db.session.commit()
         flash('Your comment is now live!')
-        return redirect(url_for('index'))
+        return redirect(url_for('git'))
     comments1= models.Git_comment.query.all()
 
        
-    return render_template('index.html',
+    return render_template('git.html',
                            title='Home',
                            form=form,
                            comments1=comments1)
@@ -42,7 +42,7 @@ def login():
         if user is not None and user.password==form.password.data:
         # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(url_for('index'))
+            return redirect(url_for('git'))
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
 
@@ -71,7 +71,7 @@ def after_login(resp):
         remember_me = session['remember_me']
         session.pop('remember_me', None)
     login_user(user, remember = remember_me)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(request.args.get('next') or url_for('git'))
 
 
 @app.before_request
@@ -82,7 +82,7 @@ def before_request():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('git'))
 
 
 

@@ -4,7 +4,7 @@
 {% block content %}
 <form class="form" method="POST">
 <div id='login'>
-<h2 style="color: #666;" id='log'>注册</h2>
+<h2 style="color: #666;" id='log'><span class="glyphicon glyphicon-registration-mark"></span> 注册</h2>
 {{ form.hidden_tag() }}     
 {{ form.nickname.label }}<br>{{ form.nickname(id='nc') }} <br>    
 {{ form.password.label }}<br>{{ form.password(id='nc') }} <br>
