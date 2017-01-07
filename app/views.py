@@ -12,7 +12,6 @@ from datetime import datetime
 
 
 
-login_manager.login_view = "162.243.128.84:90.login"
 
 
 
@@ -40,6 +39,7 @@ def git():
 
 # @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
+
 @oid.loginhandler
 def login(): 
     form = LoginForm() 
