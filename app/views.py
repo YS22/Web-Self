@@ -11,7 +11,7 @@ from datetime import datetime
 
 
 
-# @app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/git', methods=['GET', 'POST'])
 @login_required
 def git():
@@ -20,7 +20,7 @@ def git():
         comment1 = Git_comment(body=form.comment.data, timestamp=datetime.now(), author=g.user)
         db.session.add(comment1)
         db.session.commit()
-        flash('Your comment is now live!')
+        
         return redirect(url_for('git'))
     comments1= models.Git_comment.query.all()
 
@@ -31,7 +31,7 @@ def git():
                            comments1=comments1)
 
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
@@ -41,8 +41,9 @@ def login():
         if user is not None and user.password==form.password.data:
         # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            # return redirect(url_for('git'))
-            return "hello"
+            return redirect(url_for('git'))
+            # return "hello"
+
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
 
