@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid,models
@@ -38,22 +40,10 @@ def login():
         # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(url_for('index'))
-        flash('Invalid username or password.')
+        flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
 
-    # return render_template('login.html', form=form)
-
-# def login():
-#     if g.user is not None and g.user.is_authenticated():
-#         return redirect(url_for('index'))
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         session['remember_me'] = form.remember_me.data
-#         return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-#     return render_template('login.html',
-#                            title='Sign In',
-#                            form=form,
-#                            providers=app.config['OPENID_PROVIDERS'])
+   
 
 @lm.user_loader
 def load_user(id):
@@ -142,6 +132,9 @@ def register():
         user = User(nickname=form.nickname.data,password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('You can now login.')
+        flash(u'注册成功，请登录！')
+        
         return redirect(url_for('login'))
+    if User.query.filter_by(nickname=form.nickname.data).first():
+        flash(u'用户名已注册')
     return render_template('register.html', form=form)

@@ -1,3 +1,5 @@
+ # -*- coding: utf-8 -*-
+
 from app import db
 # from werkzeug.security import generate_password_has, check_password_hash
 

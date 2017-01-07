@@ -6,7 +6,7 @@
 <form class="form" method="POST">
 
 <div id="login">
-<h2 style="color: #666;" id='log'>Login</h2>
+<h2 style="color: #666;" id='log'>登录</h2>
 
 {{ form.hidden_tag() }}     
 {{ form.nickname.label }}<br>{{ form.nickname(id='nc') }} <br>    
@@ -14,12 +14,13 @@
 {{ form.submit() }} 
 </form>
 
-<p>
-New user ?
+<p>新用户？
 <a href="{{ url_for('register') }}">
-Return to register
+请注册
 </a>
 </p>
+{% include 'flash.html' %}
 </div>
 
 {% endblock %}
+ 
