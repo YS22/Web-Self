@@ -11,6 +11,13 @@ from datetime import datetime
 
 
 
+
+login_manager.login_view = "162.243.128.84:90.login"
+
+
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/git', methods=['GET', 'POST'])
 @login_required
