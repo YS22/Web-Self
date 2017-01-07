@@ -11,7 +11,7 @@ from datetime import datetime
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 @app.route('/git', methods=['GET', 'POST'])
 @login_required
 def git():
@@ -31,7 +31,7 @@ def git():
                            comments1=comments1)
 
 
-# @app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
