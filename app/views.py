@@ -11,11 +11,12 @@ from datetime import datetime
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
-
 @oid.loginhandler
 def login(): 
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('git'))
     form = LoginForm() 
     if form.validate_on_submit():
         user = User.query.filter_by(nickname=form.nickname.data).first()
@@ -24,8 +25,6 @@ def login():
             login_user(user, form.remember_me.data)
             return redirect(url_for('git'))
             # return "hello"
-
-
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
 
