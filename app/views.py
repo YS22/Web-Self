@@ -15,15 +15,15 @@ from datetime import datetime
 @app.route('/login', methods=['GET', 'POST'])
 @oid.loginhandler
 def login(): 
-    if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('git'))
+    # if g.user is not None and g.user.is_authenticated():
+    #     return redirect(url_for('git'))
     form = LoginForm() 
     if form.validate_on_submit():
         user = User.query.filter_by(nickname=form.nickname.data).first()
         if user is not None and user.password==form.password.data:
         # if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(url_for('git'))
+            return redirect('/git')
             # return "hello"
         flash(u'密码或用户名错误!')
     return render_template('login.html', form=form)
