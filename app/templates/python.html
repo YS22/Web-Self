@@ -209,7 +209,8 @@
 <hr>
 {% for comment2 in comments2 %}
 <p>
-  {{comment2.author.nickname}} : <b>{{comment2.body}}</b>
+  {{comment2.author.nickname}} : <b>{{comment2.body}}</b><br>
+  {{comment2.timestamp}}
 </p>
 <hr>
 {% endfor %}
