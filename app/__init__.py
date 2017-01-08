@@ -20,6 +20,7 @@ oid = OpenID(app, os.path.join(basedir, 'tmp'))
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'http://162.243.128.84:90/login'
+# lm.login_view = 'login'
 
 # bootstrap = Bootstrap(app)
 
