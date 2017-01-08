@@ -18,7 +18,7 @@ from datetime import datetime
 
 
 # @app.route('/', methods=['GET', 'POST'])
-@app.route('http://162.243.128.84:90/git', methods=['GET', 'POST'])
+@app.route('/git', methods=['GET', 'POST'])
 @login_required
 def git():
     form = CommentForm()
